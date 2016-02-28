@@ -1,12 +1,13 @@
 package de.mvcturbine.world;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import de.mvcturbine.util.geom.AABB;
+import de.mvcturbine.util.geom.BoundingBox;
+import de.mvcturbine.util.geom.Loc2D;
+import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
 public class World extends Observable
@@ -15,10 +16,10 @@ public class World extends Observable
 	protected List<Entity> entityRemove = new ArrayList<>();
 	protected List<Entity> entityAdd = new ArrayList<>();
 
-	private Dimension size;
-	private Rectangle2D bounds;
+	private Size2D size;
+	private AABB bounds;
 
-	public World(Dimension size)
+	public World(Size2D size)
 	{
 		this.setSize(size);
 	}
@@ -26,7 +27,7 @@ public class World extends Observable
 	/**
 	 * @return the size
 	 */
-	public Dimension getSize()
+	public Size2D getSize()
 	{
 		return size;
 	}
@@ -35,13 +36,13 @@ public class World extends Observable
 	 * @param size
 	 *            the size to set
 	 */
-	public void setSize(Dimension size)
+	public void setSize(Size2D size)
 	{
 		this.size = size;
-		this.bounds = new Rectangle(size);
+		this.bounds = new AABB(new Loc2D(), size);
 	}
 
-	public Rectangle2D getBounds()
+	public BoundingBox getBounds()
 	{
 		return this.bounds;
 	}
