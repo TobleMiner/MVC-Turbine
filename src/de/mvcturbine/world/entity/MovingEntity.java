@@ -5,11 +5,11 @@ import java.util.Observable;
 import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.World;
 
-public class MovingeEntity extends Entity
+public class MovingEntity extends Entity
 {
 	private Vec2D velocity;
 
-	public MovingeEntity(World w)
+	public MovingEntity(World w)
 	{
 		super(w);
 	}
@@ -40,6 +40,7 @@ public class MovingeEntity extends Entity
 
 	protected void updatePosition()
 	{
-		this.setLocation((this.getLocation().add(this.getVelocity())));
+		this.setLocation(this.getLocation()
+				.add(this.getVelocity().clone().divide(this.world.getGame().getTPS())));
 	}
 }

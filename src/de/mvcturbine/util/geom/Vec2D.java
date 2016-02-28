@@ -37,6 +37,13 @@ public class Vec2D implements Cloneable, DimensionProvider
 		return this;
 	}
 
+	public Vec2D divide(double d)
+	{
+		this.x /= d;
+		this.y /= d;
+		return this;
+	}
+
 	public Vec2D rotate(double angle)
 	{
 		double x = this.x * Math.cos(angle) - this.y * Math.sin(angle);

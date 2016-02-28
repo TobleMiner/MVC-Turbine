@@ -11,7 +11,7 @@ public abstract class BoundingBox
 	 * @param bb
 	 * @return
 	 */
-	public boolean intersects(AABB bb)
+	public boolean intersects(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
 		{
@@ -20,7 +20,7 @@ public abstract class BoundingBox
 		return false;
 	}
 
-	public boolean isInside(AABB bb)
+	public boolean isInside(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
 		{

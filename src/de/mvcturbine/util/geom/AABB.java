@@ -36,7 +36,7 @@ public class AABB extends BoundingBox
 	 * @return
 	 */
 	@Override
-	public boolean intersects(AABB bb)
+	public boolean intersects(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
 		{
@@ -46,7 +46,7 @@ public class AABB extends BoundingBox
 	}
 
 	@Override
-	public boolean isInside(AABB bb)
+	public boolean isInside(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
 		{
