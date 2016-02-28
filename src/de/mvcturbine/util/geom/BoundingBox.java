@@ -29,6 +29,21 @@ public abstract class BoundingBox
 		return true;
 	}
 
+	public Direction getInnerCollidingFace(BoundingBox bb)
+	{
+		Loc2D[] corners = this.getCorners();
+		for(int i = 0; i < corners.length; i++)
+		{
+			int j = (i + 1) % corners.length;
+			if(!bb.contains(corners[i]) && !bb.contains(corners[j]))
+			{
+				return Direction.values()[i];
+			}
+		}
+		System.out.println("Face not found m(");
+		return null;
+	}
+
 	public boolean contains(Loc2D pos)
 	{
 		return pos.x >= this.getLocation().x &&

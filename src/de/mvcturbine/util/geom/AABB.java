@@ -22,8 +22,8 @@ public class AABB extends BoundingBox
 		this.size = size;
 		this.corners[0] = loc.clone();
 		this.corners[1] = loc.clone().add(new Vec2D(size.width, 0));
-		this.corners[2] = loc.clone().add(new Vec2D(0, size.height));
-		this.corners[3] = loc.clone().add(size);
+		this.corners[2] = loc.clone().add(size);
+		this.corners[3] = loc.clone().add(new Vec2D(0, size.height));
 	}
 
 	/**
