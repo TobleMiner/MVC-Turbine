@@ -18,6 +18,12 @@ public class Loc2D extends Point implements Cloneable, DimensionProvider
 		this.y = y;
 	}
 
+	public Loc2D(DimensionProvider d)
+	{
+		this.x = d.getX();
+		this.y = d.getY();
+	}
+
 	public Loc2D add(DimensionProvider vec)
 	{
 		this.x += vec.getX();
@@ -60,5 +66,12 @@ public class Loc2D extends Point implements Cloneable, DimensionProvider
 	{
 		this.x = x;
 		this.y = y;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s[x=%f,y=%f]", this.getClass().getName(), this.getX(),
+				this.getY());
 	}
 }

@@ -51,4 +51,11 @@ public abstract class BoundingBox
 	 * @return the size
 	 */
 	public abstract Size2D getSize();
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s loc=%s size=%s", this.getClass().getName(),
+				this.getLocation().toString(), this.getSize().toString());
+	}
 }

@@ -26,6 +26,8 @@ public abstract class Game extends Observable implements Runnable
 	protected void tick()
 	{
 		this.ticks++;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override

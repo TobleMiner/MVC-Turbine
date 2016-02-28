@@ -16,6 +16,12 @@ public class Vec2D implements Cloneable, DimensionProvider
 		this.y = y;
 	}
 
+	public Vec2D(DimensionProvider d)
+	{
+		this.x = d.getX();
+		this.y = d.getY();
+	}
+
 	public Vec2D add(DimensionProvider vec)
 	{
 		this.x += vec.getX();

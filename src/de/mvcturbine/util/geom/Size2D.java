@@ -14,6 +14,12 @@ public class Size2D extends Dimension2D implements DimensionProvider
 		this.height = height;
 	}
 
+	public Size2D(DimensionProvider d)
+	{
+		this.width = d.getX();
+		this.height = d.getY();
+	}
+
 	public Size2D(Dimension d)
 	{
 		this.width = d.getWidth();
@@ -49,5 +55,12 @@ public class Size2D extends Dimension2D implements DimensionProvider
 	public double getY()
 	{
 		return this.height;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s[width=%f,height=%f]", this.getClass().getName(),
+				this.getX(), this.getY());
 	}
 }

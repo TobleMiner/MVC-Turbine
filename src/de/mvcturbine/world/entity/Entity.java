@@ -21,7 +21,7 @@ public class Entity implements Observer
 
 	protected World world;
 
-	private Size2D size;
+	protected Size2D size;
 
 	protected Entity(World w)
 	{
@@ -71,7 +71,7 @@ public class Entity implements Observer
 	 */
 	public World getWorld()
 	{
-		return world;
+		return this.world;
 	}
 
 	/**
