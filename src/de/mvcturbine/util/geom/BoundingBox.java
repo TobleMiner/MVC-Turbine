@@ -1,31 +1,7 @@
 package de.mvcturbine.util.geom;
 
-public class AABB extends BoundingBox
+public abstract class BoundingBox
 {
-	private Loc2D location;
-	private Size2D size;
-	private Loc2D[] corners = new Loc2D[4];
-
-	protected AABB()
-	{
-
-	}
-
-	public AABB(Loc2D loc, Size2D size)
-	{
-		this.setBoundingBox(loc, size);
-	}
-
-	public void setBoundingBox(Loc2D loc, Size2D size)
-	{
-		this.location = loc;
-		this.size = size;
-		this.corners[0] = loc.clone();
-		this.corners[1] = loc.clone().add(new Vec2D(size.width, 0));
-		this.corners[2] = loc.clone().add(new Vec2D(0, size.height));
-		this.corners[3] = loc.clone().add(size);
-	}
-
 	/**
 	 * This test is extremely simplified and works only AND ONLY IF this bb
 	 * moves over the bb we are testing against. If two bbs are placed without
@@ -35,7 +11,6 @@ public class AABB extends BoundingBox
 	 * @param bb
 	 * @return
 	 */
-	@Override
 	public boolean intersects(AABB bb)
 	{
 		for(Loc2D corner : this.getCorners())
@@ -45,7 +20,6 @@ public class AABB extends BoundingBox
 		return false;
 	}
 
-	@Override
 	public boolean isInside(AABB bb)
 	{
 		for(Loc2D corner : this.getCorners())
@@ -55,7 +29,6 @@ public class AABB extends BoundingBox
 		return true;
 	}
 
-	@Override
 	public boolean contains(Loc2D pos)
 	{
 		return pos.x >= this.getLocation().x &&
@@ -67,27 +40,15 @@ public class AABB extends BoundingBox
 	/**
 	 * @return the corners
 	 */
-	@Override
-	public Loc2D[] getCorners()
-	{
-		return corners;
-	}
+	public abstract Loc2D[] getCorners();
 
 	/**
 	 * @return the location
 	 */
-	@Override
-	public Loc2D getLocation()
-	{
-		return location;
-	}
+	public abstract Loc2D getLocation();
 
 	/**
 	 * @return the size
 	 */
-	@Override
-	public Size2D getSize()
-	{
-		return size;
-	}
+	public abstract Size2D getSize();
 }

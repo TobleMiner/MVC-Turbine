@@ -40,6 +40,6 @@ public class MovingeEntity extends Entity
 
 	protected void updatePosition()
 	{
-		this.setPosition(this.getPosition().add(this.getVelocity()));
+		this.setLocation((this.getLocation().add(this.getVelocity())));
 	}
 }

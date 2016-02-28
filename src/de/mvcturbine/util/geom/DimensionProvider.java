@@ -1,6 +1,6 @@
 package de.mvcturbine.util.geom;
 
-public interface IDimensionProvider
+public interface DimensionProvider
 {
 	public double getX();
 

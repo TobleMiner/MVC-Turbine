@@ -1,6 +1,6 @@
 package de.mvcturbine.util.geom;
 
-public class Vec2D implements Cloneable, IDimensionProvider
+public class Vec2D implements Cloneable, DimensionProvider
 {
 	public double x;
 	public double y;
@@ -16,14 +16,14 @@ public class Vec2D implements Cloneable, IDimensionProvider
 		this.y = y;
 	}
 
-	public Vec2D add(IDimensionProvider vec)
+	public Vec2D add(DimensionProvider vec)
 	{
 		this.x += vec.getX();
 		this.y += vec.getY();
 		return this;
 	}
 
-	public Vec2D sub(IDimensionProvider vec)
+	public Vec2D sub(DimensionProvider vec)
 	{
 		this.x -= vec.getX();
 		this.y -= vec.getY();

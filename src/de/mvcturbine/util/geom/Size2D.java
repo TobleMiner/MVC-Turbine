@@ -3,7 +3,7 @@ package de.mvcturbine.util.geom;
 import java.awt.Dimension;
 import java.awt.geom.Dimension2D;
 
-public class Size2D extends Dimension2D implements IDimensionProvider
+public class Size2D extends Dimension2D implements DimensionProvider
 {
 	public double width;
 	public double height;

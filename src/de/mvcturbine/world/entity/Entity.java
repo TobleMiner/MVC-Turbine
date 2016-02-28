@@ -1,12 +1,12 @@
 package de.mvcturbine.world.entity;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.mvcturbine.util.geom.AABB;
-import de.mvcturbine.util.geom.Pos2D;
+import de.mvcturbine.util.geom.BoundingBox;
+import de.mvcturbine.util.geom.EntityBB;
+import de.mvcturbine.util.geom.Loc2D;
+import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.physics.PhysicsModel;
 
@@ -17,11 +17,11 @@ public class Entity implements Observer
 
 	protected PhysicsModel physics;
 
-	protected Pos2D location;
+	protected Loc2D location;
 
 	protected World world;
 
-	private Dimension size;
+	private Size2D size;
 
 	protected Entity(World w)
 	{
@@ -52,7 +52,7 @@ public class Entity implements Observer
 	/**
 	 * @return the position
 	 */
-	public Pos2D getPosition()
+	public Loc2D getLocation()
 	{
 		return this.location;
 	}
@@ -61,9 +61,9 @@ public class Entity implements Observer
 	 * @param position
 	 *            the position to set
 	 */
-	public void setPosition(Pos2D position)
+	public void setLocation(Loc2D loc)
 	{
-		this.location = position;
+		this.location = loc;
 	}
 
 	/**
@@ -86,13 +86,13 @@ public class Entity implements Observer
 	/**
 	 * @return the size
 	 */
-	public Dimension getSize()
+	public Size2D getSize()
 	{
-		return size;
+		return this.size;
 	}
 
-	public AABB getBounds()
+	public BoundingBox getBounds()
 	{
-		Rectangle aabb = new Rectangle(this.location, this.size);
+		return new EntityBB(this);
 	}
 }
