@@ -3,10 +3,18 @@ package de.mvcturbine.util.geom;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.entity.MovingEntity;
 
+/**
+ * A bounding box representing the bounds of an entity
+ * 
+ * @author tsys
+ *
+ */
 public class EntityBB extends BoundingBox
 {
+	/** Entity attached to this bounding box */
 	protected final Entity entity;
 
+	/** Creates a new bounding box around {@code e} */
 	public EntityBB(Entity e)
 	{
 		this.entity = e;
@@ -37,15 +45,32 @@ public class EntityBB extends BoundingBox
 		return this.entity.getSize();
 	}
 
+	/**
+	 * A bounding box designed to calculate collisions of a moving entity with
+	 * some bounding box
+	 * 
+	 * @author tsys
+	 *
+	 */
 	public static class Moving extends EntityBB
 	{
-
+		/**
+		 * Creates a new bounding box for a moving entity
+		 * 
+		 * @param e
+		 */
 		public Moving(MovingEntity e)
 		{
 			super(e);
 		}
 
-		// TODO Resolve fuckup
+		/**
+		 * Calculates the angle of an Entity reflecting of a bounding box
+		 * 
+		 * @param bb
+		 *            The bounding box to collide with
+		 * @return The angle
+		 */
 		public double getCollisionAngle(BoundingBox bb)
 		{
 			for(Loc2D c : bb.getCorners())

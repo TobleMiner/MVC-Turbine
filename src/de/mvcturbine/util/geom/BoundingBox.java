@@ -9,7 +9,8 @@ public abstract class BoundingBox
 	 * intersection will NOT be detected!
 	 * 
 	 * @param bb
-	 * @return
+	 *            Bounding box to test against
+	 * @return true if bbs intersect
 	 */
 	public boolean intersects(BoundingBox bb)
 	{
@@ -20,6 +21,14 @@ public abstract class BoundingBox
 		return false;
 	}
 
+	/**
+	 * Returns the number of corners of another bounding box that are inside of
+	 * this bounding box
+	 * 
+	 * @param bb
+	 *            The bounding box to check
+	 * @return the number of corners
+	 */
 	public int numberOfIntersectingCorners(BoundingBox bb)
 	{
 		int i = 0;
@@ -30,6 +39,13 @@ public abstract class BoundingBox
 		return i;
 	}
 
+	/**
+	 * Returns true if this bounding box is fully contained in {@code bb}
+	 * 
+	 * @param bb
+	 *            The bounding box to test
+	 * @return true if this bounding box is fully contained in {@code bb}
+	 */
 	public boolean isInside(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
@@ -39,7 +55,14 @@ public abstract class BoundingBox
 		return true;
 	}
 
-	public Direction getOuterCollidingFace(BoundingBox bb)
+	/**
+	 * Returns the edge of {@code bb} this bounding box is colliding with
+	 * 
+	 * @param bb
+	 *            The box to test against
+	 * @return The edge
+	 */
+	public Direction getOuterCollidingEdge(BoundingBox bb)
 	{
 		Loc2D[] corners = this.getCorners();
 		for(int i = 0; i < corners.length; i++)
@@ -50,11 +73,18 @@ public abstract class BoundingBox
 				return Direction.values()[i];
 			}
 		}
-		System.out.println("Face not found m(");
 		return null;
 	}
 
-	public Direction getInnerCollidingFace(BoundingBox bb)
+	/**
+	 * Returns the edge of {@code bb} this bounding box is colliding with on the
+	 * inside
+	 * 
+	 * @param bb
+	 *            The box to test against
+	 * @return The edge
+	 */
+	public Direction getInnerCollidingEdge(BoundingBox bb)
 	{
 		Loc2D[] corners = this.getCorners();
 		for(int i = 0; i < corners.length; i++)
@@ -65,10 +95,16 @@ public abstract class BoundingBox
 				return Direction.values()[i];
 			}
 		}
-		System.out.println("Face not found m(");
 		return null;
 	}
 
+	/**
+	 * Checks of {@code pos} is inside this bounding box
+	 * 
+	 * @param pos
+	 *            Position to test
+	 * @return true if {@code pos} is inside this bounding box
+	 */
 	public boolean contains(Loc2D pos)
 	{
 		return pos.x >= this.getLocation().x &&
@@ -78,20 +114,31 @@ public abstract class BoundingBox
 	}
 
 	/**
+	 * Gets all corners of this bounding box
+	 * 
 	 * @return the corners
 	 */
 	public abstract Loc2D[] getCorners();
 
 	/**
+	 * Gets the current location of this bounding box
+	 * 
 	 * @return the location
 	 */
 	public abstract Loc2D getLocation();
 
 	/**
+	 * Returns the current size of this bounding box
+	 * 
 	 * @return the size
 	 */
 	public abstract Size2D getSize();
 
+	/**
+	 * Provides a human readable description of this bounding box
+	 * 
+	 * @return Human readable representation
+	 */
 	@Override
 	public String toString()
 	{
