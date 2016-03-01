@@ -1,28 +1,37 @@
 package de.mvcturbine.game;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import de.mvcturbine.ui.View;
-
+/**
+ * Game base class
+ * 
+ * @author tsys
+ *
+ */
 public abstract class Game extends Observable implements Runnable
 {
+	/** Thread pool used for tick execution */
 	private static ScheduledExecutorService threadPool = Executors
 			.newScheduledThreadPool(1);
 
+	/** Thread running the tick updates */
 	private Future<?> thread = null;
 
+	/** True if game instance has been initialized */
 	private boolean initialized = false;
 
-	protected List<View> views = new ArrayList<>();
-
+	/** Number of ticks since game started */
 	protected long ticks = 0;
 
+	/**
+	 * Tick update handler. Overwrite and call super() in youe game
+	 * implementation
+	 * 
+	 */
 	protected void tick()
 	{
 		this.ticks++;
@@ -36,9 +45,12 @@ public abstract class Game extends Observable implements Runnable
 		this.tick();
 	}
 
+	/**
+	 * Initializes this game instance. May only be called once;
+	 */
 	public void init()
 	{
-		assert !initialized;
+		if(this.initialized) throw new IllegalStateException("Already initialized");
 		this.start();
 	}
 
@@ -50,6 +62,9 @@ public abstract class Game extends Observable implements Runnable
 	 */
 	public abstract int getTPS();
 
+	/**
+	 * Starts the game
+	 */
 	protected void start()
 	{
 		int msPerTick = 1000 / getTPS();
@@ -57,6 +72,9 @@ public abstract class Game extends Observable implements Runnable
 				TimeUnit.MILLISECONDS);
 	}
 
+	/**
+	 * Stops the game
+	 */
 	protected void stop()
 	{
 		this.thread.cancel(true);
