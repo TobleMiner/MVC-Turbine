@@ -1,6 +1,6 @@
 package de.mvcturbine.util.geom;
 
-public class Vec2D implements Cloneable, DimensionProvider
+public class Vec2D implements Cloneable, DimensionProvider, Comparable<Vec2D>
 {
 	public double x;
 	public double y;
@@ -79,5 +79,34 @@ public class Vec2D implements Cloneable, DimensionProvider
 	public double getY()
 	{
 		return this.y;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(!(obj instanceof Vec2D)) return false;
+		Vec2D vec = (Vec2D) obj;
+		return vec.x == this.x && vec.y == this.y;
+	}
+
+	@Override
+	public int compareTo(Vec2D vec)
+	{
+		if(vec.length() > this.length()) return 1;
+		if(vec.length() < this.length()) return -1;
+		return 0;
+	}
+
+	public double getAngle()
+	{
+		return Math.atan2(this.y, this.x);
+	}
+
+	public Vec2D setAngle(double a)
+	{
+		double length = this.length();
+		this.x = length * Math.cos(a);
+		this.y = length * Math.sin(a);
+		return this;
 	}
 }

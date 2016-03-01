@@ -1,8 +1,8 @@
 package de.mvcturbine.util.geom;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
-public class Loc2D extends Point implements Cloneable, DimensionProvider
+public class Loc2D extends Point2D implements Cloneable, DimensionProvider
 {
 	public double x;
 	public double y;

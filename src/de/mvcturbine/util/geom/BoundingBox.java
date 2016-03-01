@@ -20,6 +20,16 @@ public abstract class BoundingBox
 		return false;
 	}
 
+	public int numberOfIntersectingCorners(BoundingBox bb)
+	{
+		int i = 0;
+		for(Loc2D corner : this.getCorners())
+		{
+			if(bb.contains(corner)) i++;
+		}
+		return i;
+	}
+
 	public boolean isInside(BoundingBox bb)
 	{
 		for(Loc2D corner : this.getCorners())
@@ -27,6 +37,21 @@ public abstract class BoundingBox
 			if(!bb.contains(corner)) return false;
 		}
 		return true;
+	}
+
+	public Direction getOuterCollidingFace(BoundingBox bb)
+	{
+		Loc2D[] corners = this.getCorners();
+		for(int i = 0; i < corners.length; i++)
+		{
+			int j = (i + 1) % corners.length;
+			if(bb.contains(corners[i]) && bb.contains(corners[j]))
+			{
+				return Direction.values()[i];
+			}
+		}
+		System.out.println("Face not found m(");
+		return null;
 	}
 
 	public Direction getInnerCollidingFace(BoundingBox bb)
