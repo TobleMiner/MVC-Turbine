@@ -10,19 +10,30 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.physics.PhysicsModel;
 
+/**
+ * Base class of all in game entities
+ * 
+ * @author tsys
+ *
+ */
 public class Entity implements Observer
 {
 	/** {@code true} if entity shall be removed by tick scheduler */
 	protected boolean remove = false;
 
+	/** Physics mode to use for this entity */
 	protected PhysicsModel physics;
 
+	/** Location of this entity */
 	protected Loc2D location;
 
+	/** World this entity is in */
 	protected World world;
 
+	/** Size of this entity */
 	protected Size2D size;
 
+	/** Constructs a new entity */
 	protected Entity(World w)
 	{
 		this.world = w;
@@ -38,11 +49,20 @@ public class Entity implements Observer
 		this.applyPhysics();
 	}
 
+	/**
+	 * Update tick by world
+	 * 
+	 * @param w
+	 *            The world
+	 */
 	protected void worldUpdate(World w)
 	{
 
 	}
 
+	/**
+	 * Apply the set physics model to this entity
+	 */
 	protected void applyPhysics()
 	{
 		if(this.physics == null) return;
@@ -50,6 +70,8 @@ public class Entity implements Observer
 	}
 
 	/**
+	 * Returns the position if this entity
+	 * 
 	 * @return the position
 	 */
 	public Loc2D getLocation()
@@ -58,6 +80,8 @@ public class Entity implements Observer
 	}
 
 	/**
+	 * Sets the position of this entity
+	 * 
 	 * @param position
 	 *            the position to set
 	 */
@@ -67,6 +91,8 @@ public class Entity implements Observer
 	}
 
 	/**
+	 * Returns the world this entity is in
+	 * 
 	 * @return the world
 	 */
 	public World getWorld()
@@ -75,6 +101,8 @@ public class Entity implements Observer
 	}
 
 	/**
+	 * Sets the world this enity is in
+	 * 
 	 * @param world
 	 *            the world to set
 	 */
@@ -84,6 +112,8 @@ public class Entity implements Observer
 	}
 
 	/**
+	 * Returns the size of this entity
+	 * 
 	 * @return the size
 	 */
 	public Size2D getSize()
@@ -91,6 +121,11 @@ public class Entity implements Observer
 		return this.size;
 	}
 
+	/**
+	 * Returns a bounding box for this entity
+	 * 
+	 * @return
+	 */
 	public BoundingBox getBounds()
 	{
 		return new EntityBB(this);
