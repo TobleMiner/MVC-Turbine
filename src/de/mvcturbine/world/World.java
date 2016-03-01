@@ -15,15 +15,32 @@ import de.mvcturbine.world.entity.Entity;
 
 public class World extends Observable implements Observer
 {
+	/** List of all valid entities */
 	protected List<Entity> entityRegistry = new ArrayList<>();
+
+	/** List of entities to remove on next tick */
 	protected List<Entity> entityRemove = new ArrayList<>();
+
+	/** List of entities to add on next tick */
 	protected List<Entity> entityAdd = new ArrayList<>();
 
+	/** Game of this world */
 	private Game game;
 
+	/** Size of this world */
 	private Dimension size;
+
+	/** Bounds of this world */
 	private AABB bounds;
 
+	/**
+	 * Initializes a new world with the given game and size
+	 * 
+	 * @param game
+	 *            The game (you lost)
+	 * @param size
+	 *            The size of the world
+	 */
 	public World(Game game, Dimension size)
 	{
 		this.game = game;
@@ -32,6 +49,8 @@ public class World extends Observable implements Observer
 	}
 
 	/**
+	 * Retruns the size of the world
+	 * 
 	 * @return the size
 	 */
 	public Dimension getSize()
@@ -40,6 +59,8 @@ public class World extends Observable implements Observer
 	}
 
 	/**
+	 * Sets the size of this world
+	 * 
 	 * @param size
 	 *            the size to set
 	 */
@@ -49,12 +70,19 @@ public class World extends Observable implements Observer
 		this.bounds = new AABB(new Loc2D(), new Size2D(size));
 	}
 
+	/**
+	 * Returns the bounds of this world as a bounding box
+	 * 
+	 * @return The bounds of this world as a bounding box
+	 */
 	public BoundingBox getBounds()
 	{
 		return this.bounds;
 	}
 
 	/**
+	 * Returns the game of this world
+	 * 
 	 * @return the game
 	 */
 	public Game getGame()
@@ -62,6 +90,14 @@ public class World extends Observable implements Observer
 		return game;
 	}
 
+	/**
+	 * Updates the world state if the update originates from a Game class
+	 * 
+	 * @param o
+	 *            Observable
+	 * @param arg
+	 *            Argument
+	 */
 	@Override
 	public void update(Observable o, Object arg)
 	{
@@ -71,12 +107,20 @@ public class World extends Observable implements Observer
 		}
 	}
 
+	/**
+	 * Tick method
+	 */
 	public void tick()
 	{
 		this.setChanged();
 		this.notifyObservers();
 	}
 
+	/**
+	 * Returns a list of all entities in this world
+	 * 
+	 * @return A list of all entities in this world
+	 */
 	public List<Entity> getAllEntities()
 	{
 		return this.entityRegistry;
