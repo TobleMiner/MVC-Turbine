@@ -3,7 +3,6 @@ package de.mvcturbine.world.entity;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
@@ -124,9 +123,9 @@ public class Entity implements Observer
 	/**
 	 * Returns a bounding box for this entity
 	 * 
-	 * @return
+	 * @return A new vounding box for this entity
 	 */
-	public BoundingBox getBounds()
+	public EntityBB getBounds()
 	{
 		return new EntityBB(this);
 	}
