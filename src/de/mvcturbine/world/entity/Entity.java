@@ -19,7 +19,7 @@ import de.mvcturbine.world.physics.PhysicsModel;
 public class Entity implements Observer
 {
 	/** {@code true} if entity shall be removed by tick scheduler */
-	protected boolean remove = false;
+	private boolean remove = false;
 
 	/** Physics mode to use for this entity */
 	protected PhysicsModel physics;
@@ -129,5 +129,26 @@ public class Entity implements Observer
 	public BoundingBox getBounds()
 	{
 		return new EntityBB(this);
+	}
+
+	/**
+	 * Returns true if this entity shall be removed on next tick
+	 * 
+	 * @return true if this entity shall be removed on next tick
+	 */
+	public boolean shouldRemove()
+	{
+		return remove;
+	}
+
+	/**
+	 * Sets whether this entity should be removed on next tick
+	 * 
+	 * @param remove
+	 *            true if entity should be removed
+	 */
+	public void remove(boolean remove)
+	{
+		this.remove = remove;
 	}
 }

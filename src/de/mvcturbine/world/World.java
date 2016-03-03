@@ -19,10 +19,10 @@ public class World extends Observable implements Observer
 	protected List<Entity> entityRegistry = new ArrayList<>();
 
 	/** List of entities to remove on next tick */
-	protected List<Entity> entityRemove = new ArrayList<>();
+	private List<Entity> entityRemove = new ArrayList<>();
 
 	/** List of entities to add on next tick */
-	protected List<Entity> entityAdd = new ArrayList<>();
+	private List<Entity> entityAdd = new ArrayList<>();
 
 	/** Game of this world */
 	private Game game;
@@ -114,6 +114,14 @@ public class World extends Observable implements Observer
 	{
 		this.setChanged();
 		this.notifyObservers();
+		for(Entity e : this.entityRegistry)
+		{
+			if(e.shouldRemove()) this.entityRemove.add(e);
+		}
+		this.entityRegistry.removeAll(this.entityRemove);
+		this.entityRemove.clear();
+		this.entityRegistry.addAll(this.entityAdd);
+		this.entityAdd.clear();
 	}
 
 	/**
@@ -124,5 +132,16 @@ public class World extends Observable implements Observer
 	public List<Entity> getAllEntities()
 	{
 		return this.entityRegistry;
+	}
+
+	/**
+	 * Adds an entity to this world
+	 * 
+	 * @param e
+	 *            Entity to add
+	 */
+	public void addEntity(Entity e)
+	{
+		this.entityAdd.add(e);
 	}
 }
