@@ -28,9 +28,8 @@ public abstract class Game extends Observable implements Runnable
 	protected long ticks = 0;
 
 	/**
-	 * Tick update handler. Overwrite and call super() in youe game
+	 * Tick update handler. Overwrite and call super() in your game
 	 * implementation
-	 * 
 	 */
 	protected void tick()
 	{
@@ -42,7 +41,10 @@ public abstract class Game extends Observable implements Runnable
 	@Override
 	public void run()
 	{
-		this.tick();
+		synchronized(this)
+		{
+			this.tick();
+		}
 	}
 
 	/**
