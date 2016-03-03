@@ -116,7 +116,11 @@ public class World extends Observable implements Observer
 		this.notifyObservers();
 		for(Entity e : this.entityRegistry)
 		{
-			if(e.shouldRemove()) this.entityRemove.add(e);
+			if(e.shouldRemove())
+			{
+				this.entityRemove.add(e);
+				deleteObserver(e);
+			}
 		}
 		this.entityRegistry.removeAll(this.entityRemove);
 		this.entityRemove.clear();
