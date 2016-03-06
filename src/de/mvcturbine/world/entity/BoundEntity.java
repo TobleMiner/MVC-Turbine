@@ -28,4 +28,10 @@ public class BoundEntity extends Entity
 	{
 		return this.size;
 	}
+
+	@Override
+	public boolean isSolid()
+	{
+		return true;
+	}
 }

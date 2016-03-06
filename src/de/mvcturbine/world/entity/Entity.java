@@ -144,4 +144,6 @@ public abstract class Entity implements Observer
 	{
 		this.remove = remove;
 	}
+
+	public abstract boolean isSolid();
 }
