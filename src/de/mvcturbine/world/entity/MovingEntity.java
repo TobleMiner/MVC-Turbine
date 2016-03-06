@@ -14,7 +14,7 @@ import de.mvcturbine.world.World;
  * @author tsys
  *
  */
-public class MovingEntity extends Entity
+public abstract class MovingEntity extends Entity
 {
 	/** The velovity of this entity */
 	private Vec2D velocity;
@@ -54,10 +54,8 @@ public class MovingEntity extends Entity
 	@Override
 	public void update(Observable o, Object arg)
 	{
-		Vec2D vec_before = this.getVelocity().clone();
 		super.update(o, arg);
 		this.updatePosition();
-		if(!vec_before.equals(this.getVelocity())) this.updatePosition();
 	}
 
 	/**

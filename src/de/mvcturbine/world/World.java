@@ -11,10 +11,13 @@ import de.mvcturbine.util.geom.AABB;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
+import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 
 public class World extends Observable implements Observer
 {
+	protected final int BOUNDARY_WIDTH = 5;
+
 	/** List of all valid entities */
 	protected List<Entity> entityRegistry = new ArrayList<>();
 
@@ -30,9 +33,6 @@ public class World extends Observable implements Observer
 	/** Size of this world */
 	private Dimension size;
 
-	/** Bounds of this world */
-	private AABB bounds;
-
 	/**
 	 * Initializes a new world with the given game and size
 	 * 
@@ -45,7 +45,7 @@ public class World extends Observable implements Observer
 	{
 		this.game = game;
 		this.setSize(size);
-		game.addObserver(this);
+		this.createBounds();
 	}
 
 	/**
@@ -67,7 +67,6 @@ public class World extends Observable implements Observer
 	public void setSize(Dimension size)
 	{
 		this.size = size;
-		this.bounds = new AABB(new Loc2D(), new Size2D(size));
 	}
 
 	/**
@@ -75,9 +74,9 @@ public class World extends Observable implements Observer
 	 * 
 	 * @return The bounds of this world as a bounding box
 	 */
-	public BoundingBox getBounds()
+	protected BoundingBox getBounds()
 	{
-		return this.bounds;
+		return new AABB(new Loc2D(), new Size2D(size));
 	}
 
 	/**
@@ -147,5 +146,29 @@ public class World extends Observable implements Observer
 	public void addEntity(Entity e)
 	{
 		this.entityAdd.add(e);
+	}
+
+	/**
+	 * Creates rectangular bounds from BoundEntities and places them around the
+	 * world boundaries
+	 */
+	protected void createBounds()
+	{
+		BoundEntity bound = new BoundEntity(this);
+		bound.setLocation(new Loc2D(0, -BOUNDARY_WIDTH));
+		bound.setSize(new Size2D(this.size.width, BOUNDARY_WIDTH));
+		this.addEntity(bound);
+		bound = new BoundEntity(this);
+		bound.setLocation(new Loc2D(this.size.width, 0));
+		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
+		this.addEntity(bound);
+		bound = new BoundEntity(this);
+		bound.setLocation(new Loc2D(0, this.size.height));
+		bound.setSize(new Size2D(this.size.width, BOUNDARY_WIDTH));
+		this.addEntity(bound);
+		bound = new BoundEntity(this);
+		bound.setLocation(new Loc2D(-BOUNDARY_WIDTH, 0));
+		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
+		this.addEntity(bound);
 	}
 }

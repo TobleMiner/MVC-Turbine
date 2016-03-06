@@ -15,7 +15,7 @@ import de.mvcturbine.world.physics.PhysicsModel;
  * @author tsys
  *
  */
-public class Entity implements Observer
+public abstract class Entity implements Observer
 {
 	/** {@code true} if entity shall be removed by tick scheduler */
 	private boolean remove = false;
@@ -28,9 +28,6 @@ public class Entity implements Observer
 
 	/** World this entity is in */
 	protected World world;
-
-	/** Size of this entity */
-	protected Size2D size;
 
 	/** Constructs a new entity */
 	protected Entity(World w)
@@ -115,10 +112,7 @@ public class Entity implements Observer
 	 * 
 	 * @return the size
 	 */
-	public Size2D getSize()
-	{
-		return this.size;
-	}
+	public abstract Size2D getSize();
 
 	/**
 	 * Returns a bounding box for this entity

@@ -90,6 +90,8 @@ public class EntityBB extends BoundingBox
 																// for each edge
 				}
 			}
+			int i = 0;
+			double angle = 0;
 			for(Loc2D c : this.getCorners())
 			{
 				if(!bb.contains(c)) continue;
@@ -105,10 +107,11 @@ public class EntityBB extends BoundingBox
 					double angleEdge = edge.getDirection().getAngle();
 					double angleIn = velocity.getDirection().getAngle() - angleEdge;
 					if(angleIn < 0) angleIn += Math.PI;
-					return angleEdge - angleIn;
+					angle += angleEdge - angleIn;
+					i++;
 				}
 			}
-			return Double.NaN;
+			return angle / i;
 		}
 	}
 }
