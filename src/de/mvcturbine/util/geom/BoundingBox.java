@@ -62,6 +62,7 @@ public abstract class BoundingBox
 	 *            The box to test against
 	 * @return The edge
 	 */
+	@Deprecated
 	public Direction getOuterCollidingEdge(BoundingBox bb)
 	{
 		Loc2D[] corners = this.getCorners();
@@ -84,6 +85,7 @@ public abstract class BoundingBox
 	 *            The box to test against
 	 * @return The edge
 	 */
+	@Deprecated
 	public Direction getInnerCollidingEdge(BoundingBox bb)
 	{
 		Loc2D[] corners = this.getCorners();

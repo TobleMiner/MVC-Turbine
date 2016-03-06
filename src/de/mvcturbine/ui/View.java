@@ -1,12 +1,14 @@
 package de.mvcturbine.ui;
 
+import java.util.Observer;
+
 /**
- * Base class for views
+ * Base interface for views
  * 
  * @author tsys
  *
  */
-public class View
+public interface View extends Observer
 {
 
 }
