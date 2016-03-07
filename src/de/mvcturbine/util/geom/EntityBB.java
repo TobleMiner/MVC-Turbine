@@ -89,7 +89,9 @@ public class EntityBB extends BoundingBox
 					if(poi == null) continue;
 					double angleEdge = edge.getDirection().getAngle();
 					double angleIn = velocity.getDirection().getAngle() - angleEdge;
-					if(angleIn < 0) angleIn += Math.PI;
+					if(angleIn < 0)
+						angleIn += Math.PI;
+					else if(angleIn > Math.PI) angleIn -= Math.PI;
 					angle += angleEdge - angleIn;
 					i++;
 				}
