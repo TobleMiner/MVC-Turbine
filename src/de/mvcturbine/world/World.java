@@ -121,10 +121,13 @@ public class World extends Observable implements Observer
 				deleteObserver(e);
 			}
 		}
-		this.entityRegistry.removeAll(this.entityRemove);
-		this.entityRemove.clear();
-		this.entityRegistry.addAll(this.entityAdd);
-		this.entityAdd.clear();
+		synchronized(this)
+		{
+			this.entityRegistry.removeAll(this.entityRemove);
+			this.entityRemove.clear();
+			this.entityRegistry.addAll(this.entityAdd);
+			this.entityAdd.clear();
+		}
 	}
 
 	/**
@@ -170,5 +173,20 @@ public class World extends Observable implements Observer
 		bound.setLocation(new Loc2D(-BOUNDARY_WIDTH, 0));
 		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
 		this.addEntity(bound);
+	}
+
+	public boolean collidsWithSolidEntity(Loc2D loc)
+	{
+		synchronized(this)
+		{
+			for(Entity e : getAllEntities())
+			{
+				if(e.isSolid() && e.getBounds().contains(loc))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -34,4 +34,10 @@ public class BoundEntity extends Entity
 	{
 		return true;
 	}
+
+	@Override
+	public boolean visible()
+	{
+		return false;
+	}
 }

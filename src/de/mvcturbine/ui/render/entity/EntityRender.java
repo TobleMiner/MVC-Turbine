@@ -8,9 +8,11 @@ import de.mvcturbine.world.entity.Entity;
 
 public abstract class EntityRender extends Render
 {
+	@Override
 	public void render(Object o, BufferedImage img, Size2D scale)
 	{
-		renderEntity((Entity) o, img, scale);
+		Entity e = (Entity) o;
+		if(e.visible()) renderEntity(e, img, scale);
 	}
 
 	public abstract void renderEntity(Entity e, BufferedImage img, Size2D scale);

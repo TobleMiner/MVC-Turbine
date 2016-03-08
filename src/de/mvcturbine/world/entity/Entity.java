@@ -1,11 +1,15 @@
 package de.mvcturbine.world.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
+import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.physics.PhysicsModel;
 
@@ -146,4 +150,29 @@ public abstract class Entity implements Observer
 	}
 
 	public abstract boolean isSolid();
+
+	public List<Entity> getCollidingEntities(Vec2D delta)
+	{
+		List<Entity> entities = new ArrayList<>();
+		synchronized(this.world)
+		{
+			for(Entity e : this.world.getAllEntities())
+			{
+				if(this == e) continue;
+				BoundingBox bb = e.getBounds();
+				Loc2D[] corners = getBounds().getCorners();
+				for(Loc2D corner : corners)
+				{
+					if(bb.contains(corner.clone().add(delta)))
+					{
+						entities.add(e);
+						break;
+					}
+				}
+			}
+		}
+		return entities;
+	}
+
+	public abstract boolean visible();
 }
