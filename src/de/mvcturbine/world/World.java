@@ -126,6 +126,10 @@ public class World extends Observable implements Observer
 			this.entityRegistry.removeAll(this.entityRemove);
 			this.entityRemove.clear();
 			this.entityRegistry.addAll(this.entityAdd);
+			for(Entity e : this.entityAdd)
+			{
+				this.addObserver(e);
+			}
 			this.entityAdd.clear();
 		}
 	}
@@ -146,7 +150,7 @@ public class World extends Observable implements Observer
 	 * @param e
 	 *            Entity to add
 	 */
-	public void addEntity(Entity e)
+	synchronized public void addEntity(Entity e)
 	{
 		this.entityAdd.add(e);
 	}

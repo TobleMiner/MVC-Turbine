@@ -1,6 +1,7 @@
 package de.mvcturbine.game;
 
 import java.util.Observable;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,6 +27,8 @@ public abstract class Game extends Observable implements Runnable
 
 	/** Number of ticks since game started */
 	protected long ticks = 0;
+
+	public final Random rand = new Random();
 
 	/**
 	 * Tick update handler. Overwrite and call super() in your game
