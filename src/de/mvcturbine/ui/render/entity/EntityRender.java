@@ -15,5 +15,5 @@ public abstract class EntityRender extends Render
 		if(e.visible()) renderEntity(e, img, scale);
 	}
 
-	public abstract void renderEntity(Entity e, BufferedImage img, Size2D scale);
+	protected abstract void renderEntity(Entity e, BufferedImage img, Size2D scale);
 }
