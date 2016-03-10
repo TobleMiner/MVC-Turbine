@@ -158,7 +158,7 @@ public abstract class Entity implements Observer
 		{
 			for(Entity e : this.world.getAllEntities())
 			{
-				if(this == e) continue;
+				if(this == e || !e.isSolid()) continue;
 				BoundingBox bb = e.getBounds();
 				Loc2D[] corners = getBounds().getCorners();
 				for(Loc2D corner : corners)
