@@ -54,6 +54,8 @@ public class EntityBB extends BoundingBox
 	 */
 	public static class Moving extends EntityBB
 	{
+		private boolean averageCollisionAngle = false;
+
 		/**
 		 * Creates a new bounding box for a moving entity
 		 * 
@@ -93,10 +95,27 @@ public class EntityBB extends BoundingBox
 						angleIn += Math.PI;
 					else if(angleIn > Math.PI) angleIn -= Math.PI;
 					angle += angleEdge - angleIn;
+					if(!this.averageCollisionAngle) return angle;
 					i++;
 				}
 			}
 			return angle / i;
+		}
+
+		/**
+		 * @return the averageCollisionAngle
+		 */
+		public boolean doAverageCollisionAngle()
+		{
+			return averageCollisionAngle;
+		}
+
+		/**
+		 * @param averageCollisionAngle the averageCollisionAngle to set
+		 */
+		public void setAverageCollisionAngle(boolean averageCollisionAngle)
+		{
+			this.averageCollisionAngle = averageCollisionAngle;
 		}
 	}
 }
