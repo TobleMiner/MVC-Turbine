@@ -26,7 +26,7 @@ public abstract class Game extends Observable implements Runnable
 	private boolean initialized = false;
 
 	/** Number of ticks since game started */
-	protected long ticks = 0;
+	private long ticks = 0;
 
 	public final Random rand = new Random();
 
@@ -84,5 +84,13 @@ public abstract class Game extends Observable implements Runnable
 	{
 		this.thread.cancel(true);
 		this.thread = null;
+	}
+
+	/**
+	 * @return the ticks
+	 */
+	public long getTicks()
+	{
+		return ticks;
 	}
 }
