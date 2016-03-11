@@ -103,6 +103,8 @@ public class EntityBB extends BoundingBox
 		}
 
 		/**
+		 * Returns whether this bounding box does average collision angles
+		 * 
 		 * @return the averageCollisionAngle
 		 */
 		public boolean doAverageCollisionAngle()
@@ -111,7 +113,10 @@ public class EntityBB extends BoundingBox
 		}
 
 		/**
-		 * @param averageCollisionAngle the averageCollisionAngle to set
+		 * Sets whether this bounding box does average collision angles
+		 *
+		 * @param averageCollisionAngle
+		 *            the averageCollisionAngle to set
 		 */
 		public void setAverageCollisionAngle(boolean averageCollisionAngle)
 		{

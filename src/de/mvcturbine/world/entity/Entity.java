@@ -39,6 +39,14 @@ public abstract class Entity implements Observer
 		this.world = w;
 	}
 
+	/**
+	 * Updates this entity
+	 * 
+	 * @param o
+	 *            The issuer of the update
+	 * @param arg
+	 *            Some additional argument
+	 */
 	@Override
 	public void update(Observable o, Object arg)
 	{
@@ -149,8 +157,22 @@ public abstract class Entity implements Observer
 		this.remove = remove;
 	}
 
+	/**
+	 * Defines whether this entity is solid (can it collide with other
+	 * entities?)
+	 * 
+	 * @return true if entity is solid
+	 */
 	public abstract boolean isSolid();
 
+	/**
+	 * Returns all solid entities colliding with this entity
+	 * 
+	 * @param delta
+	 *            Vec2D to translate the position of this entity by before
+	 *            checking for collisions
+	 * @return a list of colliding entities
+	 */
 	public List<Entity> getCollidingEntities(Vec2D delta)
 	{
 		List<Entity> entities = new ArrayList<>();
@@ -174,5 +196,10 @@ public abstract class Entity implements Observer
 		return entities;
 	}
 
+	/**
+	 * Defines whether this entity can be rendered
+	 * 
+	 * @return true if this entity should be rendered
+	 */
 	public abstract boolean visible();
 }

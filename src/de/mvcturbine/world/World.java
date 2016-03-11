@@ -178,19 +178,4 @@ public class World extends Observable implements Observer
 		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
 		this.addEntity(bound);
 	}
-
-	public boolean collidsWithSolidEntity(Loc2D loc)
-	{
-		synchronized(this)
-		{
-			for(Entity e : getAllEntities())
-			{
-				if(e.isSolid() && e.getBounds().contains(loc))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 }

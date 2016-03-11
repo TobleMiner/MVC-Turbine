@@ -6,6 +6,13 @@ import de.mvcturbine.ui.render.Render;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Entity render base class. Translates render calls to renderEntity calls if
+ * entity is visible
+ * 
+ * @author tsys
+ *
+ */
 public abstract class EntityRender extends Render
 {
 	@Override

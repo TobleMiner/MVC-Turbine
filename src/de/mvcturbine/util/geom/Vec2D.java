@@ -1,5 +1,11 @@
 package de.mvcturbine.util.geom;
 
+/**
+ * 2D vector implementation
+ * 
+ * @author tsys
+ *
+ */
 public class Vec2D implements Cloneable, DimensionProvider, Comparable<Vec2D>
 {
 	/** length in x direction */
@@ -178,5 +184,12 @@ public class Vec2D implements Cloneable, DimensionProvider, Comparable<Vec2D>
 		this.x = length * Math.cos(a);
 		this.y = length * Math.sin(a);
 		return this;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s[x=%f,y=%f]", this.getClass().getName(), this.getX(),
+				this.getY());
 	}
 }
