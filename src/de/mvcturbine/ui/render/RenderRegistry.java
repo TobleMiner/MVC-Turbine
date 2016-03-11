@@ -40,7 +40,7 @@ public class RenderRegistry
 		while(type != null)
 		{
 			Render render = this.renderRegistry.get(type);
-			if(render != null) return render;
+			if(this.renderRegistry.containsKey(type)) return render;
 			type = type.getSuperclass();
 		}
 		return null;
