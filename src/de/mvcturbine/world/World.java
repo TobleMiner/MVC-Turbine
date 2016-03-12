@@ -151,6 +151,9 @@ public class World extends Observable implements Observer
 		this.entityAdd.add(e);
 	}
 
+	/**
+	 * Resets the world
+	 */
 	public void resetWorld()
 	{
 		synchronized(this.getGame())
