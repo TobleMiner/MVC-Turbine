@@ -28,6 +28,8 @@ public abstract class Game extends Observable implements Runnable
 	/** Number of ticks since game started */
 	private long ticks = 0;
 
+	private boolean running = false;
+
 	public final Random rand = new Random();
 
 	/**
@@ -72,6 +74,8 @@ public abstract class Game extends Observable implements Runnable
 	 */
 	protected void start()
 	{
+		if(this.running) return;
+		this.running = true;
 		int msPerTick = 1000 / getTPS();
 		this.thread = threadPool.scheduleAtFixedRate(this, msPerTick, msPerTick,
 				TimeUnit.MILLISECONDS);
@@ -82,6 +86,8 @@ public abstract class Game extends Observable implements Runnable
 	 */
 	protected void stop()
 	{
+		if(!this.running) return;
+		this.running = false;
 		this.thread.cancel(true);
 		this.thread = null;
 	}

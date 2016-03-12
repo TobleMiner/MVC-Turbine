@@ -11,13 +11,10 @@ import de.mvcturbine.util.geom.AABB;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
-import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 
 public class World extends Observable implements Observer
 {
-	protected final int BOUNDARY_WIDTH = 5;
-
 	/** List of all valid entities */
 	protected List<Entity> entityRegistry = new ArrayList<>();
 
@@ -45,11 +42,10 @@ public class World extends Observable implements Observer
 	{
 		this.game = game;
 		this.setSize(size);
-		this.createBounds();
 	}
 
 	/**
-	 * Retruns the size of the world
+	 * Returns the size of the world
 	 * 
 	 * @return the size
 	 */
@@ -155,27 +151,14 @@ public class World extends Observable implements Observer
 		this.entityAdd.add(e);
 	}
 
-	/**
-	 * Creates rectangular bounds from BoundEntities and places them around the
-	 * world boundaries
-	 */
-	protected void createBounds()
+	public void resetWorld()
 	{
-		BoundEntity bound = new BoundEntity(this);
-		bound.setLocation(new Loc2D(0, -BOUNDARY_WIDTH));
-		bound.setSize(new Size2D(this.size.width, BOUNDARY_WIDTH));
-		this.addEntity(bound);
-		bound = new BoundEntity(this);
-		bound.setLocation(new Loc2D(this.size.width, 0));
-		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
-		this.addEntity(bound);
-		bound = new BoundEntity(this);
-		bound.setLocation(new Loc2D(0, this.size.height));
-		bound.setSize(new Size2D(this.size.width, BOUNDARY_WIDTH));
-		this.addEntity(bound);
-		bound = new BoundEntity(this);
-		bound.setLocation(new Loc2D(-BOUNDARY_WIDTH, 0));
-		bound.setSize(new Size2D(BOUNDARY_WIDTH, this.size.height));
-		this.addEntity(bound);
+		synchronized(this.getGame())
+		{
+			this.entityRegistry.clear();
+			this.entityAdd.clear();
+			this.entityRemove.clear();
+		}
 	}
+
 }
