@@ -74,7 +74,7 @@ public abstract class Game extends Observable implements Runnable
 	 */
 	protected void start()
 	{
-		if(this.running) return;
+		assert !this.running;
 		this.running = true;
 		int msPerTick = 1000 / getTPS();
 		this.thread = threadPool.scheduleAtFixedRate(this, msPerTick, msPerTick,
@@ -86,7 +86,7 @@ public abstract class Game extends Observable implements Runnable
 	 */
 	protected void stop()
 	{
-		if(!this.running) return;
+		assert this.running;
 		this.running = false;
 		this.thread.cancel(true);
 		this.thread = null;
@@ -98,5 +98,21 @@ public abstract class Game extends Observable implements Runnable
 	public long getTicks()
 	{
 		return ticks;
+	}
+
+	/**
+	 * @return the running
+	 */
+	public boolean isRunning()
+	{
+		return running;
+	}
+
+	/**
+	 * @param running the running to set
+	 */
+	public void setRunning(boolean running)
+	{
+		this.running = running;
 	}
 }
