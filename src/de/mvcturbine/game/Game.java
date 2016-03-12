@@ -109,7 +109,8 @@ public abstract class Game extends Observable implements Runnable
 	}
 
 	/**
-	 * @param running the running to set
+	 * @param running
+	 *            the running to set
 	 */
 	public void setRunning(boolean running)
 	{
